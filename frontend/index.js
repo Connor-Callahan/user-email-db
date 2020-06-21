@@ -1,0 +1,77 @@
+document.addEventListener('DOMContentLoaded', () => {
+
+    // Load all the profiles
+
+    const table = document.querySelector("#table")
+
+    let allProfiles = []
+
+    function fetchProfiles() {
+        fetch('http://localhost:3000/users/')
+        .then(r => r.json())
+        .then((data) => {
+            listtable(data)
+        })
+    }
+    fetchProfiles()
+    
+    function listtable(data) {
+        data.forEach((profile) => {
+            table.innerHTML += renderProfile(profile)
+        })
+    }
+    
+    function renderProfile(profile) {
+        return `
+        <div id="profile-${profile.id}" class="profile"> 
+            <h1>${profile.name}</h1>
+                <div class="profile-button">
+                    <button data-id=${profile.id} data-action="delete" id="delete-button"> 🗑 </button>
+                    <button data-id=${profile.id} data-action="edit" id="edit-button"> ✏️ </button>
+                </div>
+        </div>
+        `
+    }
+
+    table.addEventListener('click', (e) => {
+        e.preventDefault()
+        if(e.target.id == 'delete-button') {
+            console.log(e.target.dataset.id)
+            fetch(`http://localhost:3000/users/${e.target.dataset.id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                }
+            })
+            document.querySelector("#profile-" + e.target.dataset.id).remove() 
+        }
+    })
+
+    // Creat profile form (name/email)
+    
+    const submit = document.querySelector('#submit')
+    
+    submit.addEventListener('click', (e) => {
+        e.preventDefault()
+        const name = document.querySelector("#name").value
+        const email = document.querySelector("#email").value
+        fetch('http://localhost:3000/users/', {
+            method: 'POST',
+            headers: {
+                'Content-Type' : 'application/json',
+                'Accept' : 'application/json'
+            }, 
+            body: JSON.stringify({
+                name: name,
+                email: email
+            })
+        })
+        .then((r) => r.json())
+        .then((data) => {
+            allProfiles.push(data)
+            table.innerHTML += renderSingleProfile(data)
+        })
+    })
+
+})

@@ -1,0 +1,59 @@
+body {
+  height: 500px;
+  display: grid;
+  grid-template-columns: 1fr 1fr; 
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10px;
+}
+
+#table {
+  border: 1px solid black;
+  overflow: scroll;
+  padding: 100px;
+  height: 600px;
+  grid-column: 2 / 2;
+}
+
+.profile {
+  border: 1px solid black;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr; 
+}
+
+.profile-button {
+  border: 1px solid black;
+  grid-column: 2 / 2;
+  margin: auto;
+  text-align: center;
+  width: 50%;
+  padding: 10px;
+}
+
+button {
+  background: transparent;
+  border: 0.5px solid black;
+}
+
+#submit {
+  background: transparent;
+  border: 1px solid black;
+}
+
+label {
+  font-size: 12px;
+}
+
+form {
+  border: 1px solid black;
+  grid-column: 1 / 1;
+}
+
+#input {
+  border: 1px solid black;
+  margin: auto;
+  margin-top: 20%;
+  text-align: center;
+  width: 50%;
+  padding: 10px;
+}
