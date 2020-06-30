@@ -1,6 +1,8 @@
 const tracer = require("dd-trace").init({
   logInjection: true,
-  runtimeMetrics: true
+  runtimeMetrics: true,
+  analytics: true
+  
 });
 const formats = require('dd-trace/ext/formats');
 
@@ -31,7 +33,6 @@ app.use(
 
 app.get("/", (request, response) => {
   response.json({ info: "Node.js, Express, and Postgres API" });
-  logger.info("info", "or so im told", "get out")
 });
 
 app.get("/users", db.getUsers);

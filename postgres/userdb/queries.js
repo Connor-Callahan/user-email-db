@@ -44,12 +44,10 @@ const createUser = (request, response) => {
 
   if (name == null || name == "") {
     logger.error("Name field is empty");
-    error["name"] = "name field is empty";
   }
 
   if (email == null || email == "") {
     logger.error("Email field is empty");
-    error["name"] = "name field is empty";
   }
 
   pool.query(
@@ -60,7 +58,8 @@ const createUser = (request, response) => {
         logger.error(error);
         throw error;
       }
-      response.status(201).send(`User added with ID: ${result.insertId}`);
+      console.log(results)
+      logger.info(`User added with ID: ${results.rows}`);
     }
   );
 };

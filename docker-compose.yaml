@@ -1,0 +1,16 @@
+version: "3"
+services:
+  ddagent:
+    image: datadog/agent
+    container_name: datadog-agent
+    environment:
+      - DD_APM_ENABLED=true
+      - DD_BIND_HOST=0.0.0.0
+      - DD_API_KEY=<YOUR-API-KEY>
+      - DD_LOGS_ENABLED=true
+      - DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true
+    volumes: 
+      - /var/run/docker.sock:/var/run/docker.sock:ro 
+      - /opt/datadog-agent/run:/opt/datadog-agent/run:rw 
+    ports:
+      - "8126:8126"
