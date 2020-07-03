@@ -58,8 +58,7 @@ const createUser = (request, response) => {
         logger.error(error);
         throw error;
       }
-      console.log(results)
-      logger.info(`User added with ID: ${results.rows}`);
+      logger.info(`User added with ID: ${results.insertId}`);
     }
   );
 };

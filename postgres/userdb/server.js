@@ -46,5 +46,3 @@ app.listen(port, () => {
   logger.info(`App launched on port ${port}.`);
 });
 
-
-
