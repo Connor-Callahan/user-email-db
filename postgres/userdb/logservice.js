@@ -7,7 +7,7 @@ const LoggerService = createLogger({
     format.timestamp()
   ),
   defaultMeta: { service: "user-email-db" },
-  transports: [new transports.File({ filename: "./logs/app.log" })],
+  transports: [new transports.Console()],
 });
 
 module.exports = LoggerService

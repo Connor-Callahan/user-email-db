@@ -4,10 +4,10 @@ const Pool = require("pg").Pool;
 const logger = require("./logservice.js");
 
 const pool = new Pool({
-  user: "me",
-  host: "localhost",
+  user: "docker",
+  host: "postgresql",
   database: "api",
-  password: "password",
+  password: "docker",
   port: 5432,
 });
 
@@ -20,6 +20,7 @@ const getUsers = (request, response) => {
       logger.error(error);
     }
     response.status(200).json(results.rows);
+    logger.info(`Request received at ${request.route.path}`, request.route);
   });
 };
 
