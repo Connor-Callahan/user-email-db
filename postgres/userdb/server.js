@@ -1,7 +1,7 @@
 const tracer = require("dd-trace").init({
   logInjection: true,
   runtimeMetrics: true,
-  analytics: true
+  analytics: true,
 });
 const formats = require('dd-trace/ext/formats');
 

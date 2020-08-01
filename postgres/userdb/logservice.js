@@ -6,7 +6,7 @@ const LoggerService = createLogger({
     format.json(),
     format.timestamp()
   ),
-  defaultMeta: { service: "user-email-db" },
+  defaultMeta: { service: "user-email-db"},
   transports: [new transports.Console()],
 });
 

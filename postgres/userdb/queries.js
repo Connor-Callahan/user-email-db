@@ -12,15 +12,13 @@ const pool = new Pool({
 });
 
 const getUsers = (request, response) => {
-  logger.info(`Request received at ${request.route.path}`, request.route);
-
   pool.query("SELECT * FROM users ORDER BY id ASC", (error, results) => {
     if (error) {
       throw error;
       logger.error(error);
     }
     response.status(200).json(results.rows);
-    logger.info(`Request received at ${request.route.path}`, request.route);
+    logger.info(`Users retreived from ${request.route.path}`)
   });
 };
 
@@ -95,6 +93,7 @@ const deleteUser = (request, response) => {
       throw error;
     }
     response.status(200).send(`User deleted with ID: ${id}`);
+    logger.info(info)
   });
 };
 
