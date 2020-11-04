@@ -1,3 +1,6 @@
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
 
     // Load all the profiles
@@ -10,7 +13,12 @@ document.addEventListener('DOMContentLoaded', () => {
         fetch('http://localhost:3000/users/')
         .then(r => r.json())
         .then((data) => {
-            listtable(data)
+            console.log(data.length)
+            if(data.length == 0){
+                table.innerHTML = `<h1> Index is Empty ⚠️ </h1>`
+            } else {
+                listtable(data)
+            }
         })
     }
     fetchProfiles()
@@ -35,18 +43,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
     table.addEventListener('click', (e) => {
         e.preventDefault()
+        let name = "null"
+        let email = ""
         if(e.target.id == 'delete-button') {
-            console.log(e.target.dataset.id)
             fetch(`http://localhost:3000/users/${e.target.dataset.id}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 }
-            })
+            })  
             document.querySelector("#profile-" + e.target.dataset.id).remove() 
+        } else if(e.target.id =='edit-button'){
+            fetch(`http://localhost:3000/users/${e.target.dataset.id}`)
+            .then(r => r.json())
+            .then((data) => {
+                editProfile(data)
+            })
         }
     })
+
+    // Edit profile form
+
+    function editProfile(profile) {
+        console.log(profile[0].name)
+        return table.innerHTML = `
+            <button id="back-button"> 🔙 </button>
+            <div id="input">
+            <label id="namelabel" for="name"></label>
+                <input type="text" id="name" placeholder=${profile[0].name}>
+                    <br><br>
+            <label id="emaillabel" for="email" ></label>
+                <input type="text" id="email" placeholder=${profile[0].email}><br><br>
+                    <button id="submit"> ✚ </button>
+        </div>
+            `
+    }
+    
 
     // Creat profile form (name/email)
     
