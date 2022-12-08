@@ -8,7 +8,7 @@
         "@datadog/browser-rum": "^1.24.0",
         "cors": "^2.8.5",
         "dd-trace": "^0.21.0",
-        "express": "^4.17.1",
+        "express": "^4.18.2",
         "fetch": "^1.1.0",
         "node-fetch": "^2.6.0",
         "pg": "^8.2.1",
